@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls',
+    'polls',  # added this
+    'polls_v2',  # 2nd trial
 ]
 
 MIDDLEWARE = [
