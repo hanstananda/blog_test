@@ -1,0 +1,40 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+
+<div class="ui-container">
+    <h1 class="ui dividing header" >MY COOL BLOG :)</h1>
+    <div class="ui grid">
+        <div class="sixteen wide right aligned column">
+            <div class="ui action left icon input">
+              <i class="search icon"></i>
+              <input placeholder="Search..." type="text">
+              <div class="ui teal button">Search</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui three column grid">
+        <div class="four wide column">
+            Categories
+        </div>
+        <div class="eight wide column">
+            {% if latest_post_list %}
+                {% for post in latest_post_list %}
+                    <div class="ui one column grid">
+                    {{ post.post_title }}<br>
+                    {{ post.post_content }}<br>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No posts are available.</p>
+            {% endif %}
+        </div>
+        <div class="four wide column">
+            Users
+        </div>
+    </div>
+</div>

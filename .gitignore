@@ -5,3 +5,4 @@
 .pytest_cache/
 docs/_build/
 mysite/mysite/static/
+mysite/blog/static/semantic

@@ -10,3 +10,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.post_title
+
+
+class Category(models.Model):
+    category_name = models.CharField(max_length=100)
+    post_name = models.ManyToManyField(Post)
+
+    def __str__(self):
+        return self.category_name
