@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls',  # added this
     'polls_v2',  # 2nd trial
+    'blog',  # for real test
 ]
 
 MIDDLEWARE = [
