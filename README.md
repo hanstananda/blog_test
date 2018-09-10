@@ -1,6 +1,10 @@
-# blog_test
+# Blog Creation Test
 
-##  Notes
+## Blog Notes
+
+Download `semantic-ui` and put it under `static` with directory name `semantic`
+
+##  Additional Notes
 From tutorial 2: 
 
 ```python

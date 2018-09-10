@@ -20,15 +20,9 @@
     <div class="ui three column grid">
         <div class="four wide column">
             <h2>Categories</h2>
-            {% if items_list %}
-                {% for item in items_list %}
-                    {% if item.type == 'category' %}
-                        {{ item.category_name }}<br>
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-                Unknown error occurred.
-            {% endif %}
+            {% for i in category.post_name.all %}
+                {{ i }}
+            {% endfor %}
         </div>
         <div class="eight wide column">
             {% if items_list %}
