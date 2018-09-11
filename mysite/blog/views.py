@@ -20,7 +20,23 @@ class IndexView(generic.ListView):
         return all_items
 
 
-class CategoryView(generic.DetailView):
-    model = Category
+class CategoryPostList(generic.ListView):
+
     template_name = 'blog/detail.html'
+    context_object_name = 'items_list'
+
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
+        posts = Post.objects.filter(category=self.category)
+        posts = posts.annotate(type=Value('post', CharField()))
+        categories = Category.objects.annotate(type=Value('category', CharField()))
+        all_items = list(posts) + list(categories)
+        return all_items
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in the category
+        context['category'] = self.category
+        return context
 

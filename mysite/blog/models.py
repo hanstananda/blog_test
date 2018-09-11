@@ -16,6 +16,9 @@ class Category(models.Model):
 class User(models.Model):
     user_name = models.CharField(max_length=25)
 
+    def __str__(self):
+        return self.user_name
+
 
 class Post(models.Model):
     post_title = models.CharField(max_length=200)

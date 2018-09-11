@@ -20,9 +20,22 @@
     <div class="ui three column grid">
         <div class="four wide column">
             <h2>Categories</h2>
-            {% for i in category.post_name.all %}
-                {{ i }}
-            {% endfor %}
+            {% if items_list %}
+                <ul>
+                {% for item in items_list %}
+                    {% if item.type == 'category' %}
+                        {% if category.category_name == item.category_name %}
+                            <li><b><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></b></li>
+                        {% else %}
+                            <li><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></li>
+                        {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% else %}
+                Unknown error occurred.
+            {% endif %}
         </div>
         <div class="eight wide column">
             {% if items_list %}

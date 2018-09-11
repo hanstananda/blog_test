@@ -21,11 +21,13 @@
         <div class="four wide column">
             <h2>Categories</h2>
             {% if items_list %}
+                <ul>
                 {% for item in items_list %}
                     {% if item.type == 'category' %}
-                        {{ item.category_name }}<br>
+                        <li><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></li>
                     {% endif %}
                 {% endfor %}
+                </ul>
             {% else %}
                 Unknown error occurred.
             {% endif %}
