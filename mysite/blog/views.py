@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.views import generic
 from .models import Post, Category
 from django.db.models import CharField, Value
+from .forms import NameForm
 
 # Create your views here.
 
@@ -39,4 +40,5 @@ class CategoryPostList(generic.ListView):
         # Add in the category
         context['category'] = self.category
         return context
+
 
