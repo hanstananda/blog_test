@@ -22,7 +22,7 @@ class IndexView(generic.ListView):
 
 class CategoryPostList(generic.ListView):
 
-    template_name = 'blog/detail.html'
+    template_name = 'blog/index.html'
     context_object_name = 'items_list'
 
     def get_queryset(self):

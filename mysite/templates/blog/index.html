@@ -7,7 +7,7 @@
 <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
 
 <div class="ui container">
-    <h1 class="ui dividing header" >MY COOL BLOG :)</h1>
+    <h1 class="ui dividing header" ><a href="{% url 'blog:index' %}">MY COOL BLOG :)</a></h1>
     <div class="ui grid">
         <div class="sixteen wide right aligned column">
             <div class="ui action left icon input">
@@ -24,7 +24,11 @@
                 <ul>
                 {% for item in items_list %}
                     {% if item.type == 'category' %}
-                        <li><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></li>
+                        {% if category.category_name == item.category_name %}
+                            <li><b><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></b></li>
+                        {% else %}
+                            <li><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></li>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
                 </ul>
