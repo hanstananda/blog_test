@@ -1,9 +1,9 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
 <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
 <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
 
 <div class="ui container">
@@ -11,9 +11,9 @@
     <div class="ui grid">
         <div class="sixteen wide right aligned column">
             <div class="ui action left icon input">
-              <i class="search icon"></i>
-              <input placeholder="Search..." type="text">
-              <div class="ui teal button">Search</div>
+                <i class="search icon"></i>
+                <input placeholder="Search..." type="text">
+                <div class="ui teal button">Search</div>
             </div>
         </div>
     </div>
@@ -21,17 +21,17 @@
         <div class="four wide column">
             <h2>Categories</h2>
             {% if items_list %}
-                <ul>
-                {% for item in items_list %}
-                    {% if item.type == 'category' %}
-                        {% if category.category_name == item.category_name %}
-                            <li><b><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></b></li>
-                        {% else %}
-                            <li><a href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a></li>
+                <div class="ui link list">
+                    {% for item in items_list %}
+                        {% if item.type == 'category' %}
+                            {% if category.category_name == item.category_name %}
+                                <div class="active item" href="{% url 'blog:category' item.id %}">{{ item.category_name }}</div>
+                            {% else %}
+                                <a class ="item" href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
-                </ul>
+                    {% endfor %}
+                </div>
             {% else %}
                 Unknown error occurred.
             {% endif %}
@@ -40,14 +40,25 @@
             {% if items_list %}
                 {% for item in items_list %}
                     {% if item.type == 'post' %}
-                        <div class="ui items">
-                            <div class="item">
-                                <div class="content">
-                                    <a class="header">
-                                        {{ item.post_title }}<br>
-                                    </a>
-                                    <div class="description">
-                                        {{ item.post_content }}<br>
+                        <div class="ui segment">
+                            <div class="ui items">
+                                <div class="item">
+                                    <div class="content">
+                                        <a class="header">
+                                            {{ item.post_title }}
+                                        </a>
+                                        <div class="description">
+                                            <p>{{ item.post_content }}</p>
+                                        </div>
+                                        <div class="extra">
+                                            <div class="ui left floated">
+                                                <i class="thumbs up icon"></i>
+                                                0 like(s)
+                                            </div>
+                                            <div class="ui right floated">
+                                                Comment
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +72,7 @@
         <div class="four wide column">
             <h2>Users</h2>
             <h2 class="ui teal image header">
-              <!-- <img src="assets/images/logo.png" class="image"> -->
+                <!-- <img src="assets/images/logo.png" class="image"> -->
                 <div class="content">
                     Log-in to your account
                 </div>
@@ -84,10 +95,10 @@
                     <button class="ui fluid large teal submit button">Login</button>
                 </div>
 
-              <div class="ui error message"></div>
+                <div class="ui error message"></div>
             </form>
             <div class="ui message">
-              New to us? <a href="#">Sign Up</a>
+                New to us? <a href="#">Sign Up</a>
             </div>
         </div>
     </div>

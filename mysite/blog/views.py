@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from .models import Post, Category
+from .models import Post, Category, User
 from django.db.models import CharField, Value
 from .forms import NameForm
 from django.template import loader
@@ -53,7 +53,13 @@ def login(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            return HttpResponseRedirect(reverse('blog:success'))
+            try:
+                check = User.objects.filter(user_name=email, password=password)
+                if len(check) > 0:
+                    return HttpResponseRedirect(reverse('blog:success'))
+            except:
+                pass
+            return HttpResponseRedirect(reverse('blog:fail'))
         return HttpResponseRedirect(reverse('blog:fail'))
 
     else:
