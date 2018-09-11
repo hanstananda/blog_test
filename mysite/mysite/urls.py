@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^polls/', include('polls.urls')),  # this line added
     path('polls_v2/', include('polls_v2.urls', namespace='polls_v2')),  # 2nd trial
     path('blog/', include('blog.urls', namespace='blog')),
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('', admin.site.urls),
 ]

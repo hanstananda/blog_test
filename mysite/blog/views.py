@@ -5,6 +5,8 @@ from django.views import generic
 from .models import Post, Category
 from django.db.models import CharField, Value
 from .forms import NameForm
+from django.template import loader
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -42,3 +44,25 @@ class CategoryPostList(generic.ListView):
         return context
 
 
+def login(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            return HttpResponseRedirect(reverse('blog:success'))
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
+def success(request):
+    return render(request, 'blog/success.html')
+
+
+def fail(request):
+    return render(request, 'blog/fail.html')
