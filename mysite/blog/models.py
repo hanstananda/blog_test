@@ -33,3 +33,20 @@ class Post(models.Model):
         return self.post_title
 
 
+class Likes(models.Model):
+    liked_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    liked_on = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.liked_by+self.liked_on
+
+    class Meta:
+        unique_together = ('liked_by', 'liked_on')
+
+
+class Comments(models.Model):
+    commented_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    commented_on = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.commented_by+self.commented_on
