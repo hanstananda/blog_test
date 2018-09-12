@@ -26,9 +26,17 @@ class IndexView(generic.ListView):
         all_items = list(posts) + list(categories)
         # user_profile = get_object_or_404(UserProfile, user_name=self.kwargs['user'])
         if self.request.user.is_authenticated:
-            user_profile = UserProfile.objects.filter(user_name=self.request.user)
-            all_items += list(user_profile.annotate(type=Value('user_profile', CharField())))
+            self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
+        else:
+            self.user_profile = None
         return all_items
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in the category
+        context['user_profile'] = self.user_profile
+        return context
 
 
 class CategoryPostList(generic.ListView):
@@ -46,9 +54,7 @@ class CategoryPostList(generic.ListView):
         categories = Category.objects.annotate(type=Value('category', CharField()))
         all_items = list(posts) + list(categories)
         if self.request.user.is_authenticated:
-            user_profile = UserProfile.objects.filter(user_name=self.request.user)
             self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
-            all_items += list(user_profile.annotate(type=Value('user_profile', CharField())))
         else:
             self.user_profile = None
         return all_items

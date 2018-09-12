@@ -101,37 +101,34 @@
                     New to us? <a href="#">Sign Up</a>
                 </div>
             {% else %}
-                <h2>
-                {% if user.first_name != "" and user.last_name != ""%}
-                    {{ user.first_name }} {{ user.last_name }}
-                {% elif user.first_name != "" %}
-                    {{ user.first_name }}
-                {% elif user.last_name != "" %}
-                    {{ user.last_name }}
-                {% else %}
-                    {{ user.username }}
-                {% endif %}
-                </h2>
-                {% if items_list %}
-                    {% for item in items_list %}
-                        {% if item.type == 'user_profile' %}
-                            {% if item.user_image.url != "" and item.user_image.url is not None %}
-                                First: <img src="{{ item.user_image.url }}" width="300" length="300">
-                            {% endif %}
+                <div class="ui card">
+                    <div class="header">
+                        {% if user.first_name != "" and user.last_name != ""%}
+                            {{ user.first_name }} {{ user.last_name }}
+                        {% elif user.first_name != "" %}
+                            {{ user.first_name }}
+                        {% elif user.last_name != "" %}
+                            {{ user.last_name }}
+                        {% else %}
+                            {{ user.username }}
                         {% endif %}
-                    {% endfor %}
-                {% endif %}
-                Second:
-                {% if user_profile is None %}
-                    <img src="{% static 'default.jpg' %}" width="300" length="300">
-                {% else %}
-                    <img src="{{ user_profile.user_image.url }}" width="300" length="300">
-                {% endif %}
-                <form action="{% url 'blog:logout_view' %}" method="post">
-                    {% csrf_token %}
-                    <button class="negative ui button">Logout</button>
-                </form>
+                    </div>
 
+                    <div class="image">
+                        {% if user_profile is None %}
+                            <img class="ui wireframe image" src="{% static 'default.jpg' %}">
+                        {% else %}
+                            <img class="ui wireframe image" src="{{ user_profile.user_image.url }}">
+                        {% endif %}
+                    </div>
+
+                    <div class="extra content">
+                        <form action="{% url 'blog:logout_view' %}" method="post">
+                            {% csrf_token %}
+                            <button class="negative ui button">Logout</button>
+                        </form>
+                    </div>
+                </div>
             {% endif %}
         </div>
     </div>
