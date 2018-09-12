@@ -14,8 +14,12 @@ class Category(models.Model):
 
 
 class User(models.Model):
-    user_name = models.CharField(max_length=25)
+    user_name = models.CharField(max_length=25, primary_key=True)
     password = models.CharField(max_length=25)
+    email = models.CharField(max_length=25)
+    First_Name = models.CharField(max_length=25, default=None, blank=True, null=True)
+    Last_Name = models.CharField(max_length=25, default=None, blank=True, null=True)
+    user_image = models.ImageField(default=None, blank=True, null=True)
 
     def __str__(self):
         return self.user_name
@@ -26,7 +30,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField('date published')
     post_content = models.CharField(max_length=100000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    User = models.ForeignKey(User,on_delete=models.CASCADE)
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.post_title

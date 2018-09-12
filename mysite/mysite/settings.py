@@ -127,3 +127,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
+# Media files (Uploaded images)
+# Must be different with Static Files!!!
+# https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-MEDIA_URL
+
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+MEDIA_URL = '/media/'

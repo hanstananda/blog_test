@@ -55,9 +55,9 @@ c = q.choice_set.filter(choice_text__startswith='Just hacking')
 c.delete()
 ```
 
-###How to namespace: 
+### How to namespace: 
 
-in mysite\urls, put inside urlpatterns these lines below:  
+in `mysite\urls`, put inside urlpatterns these lines below:  
 ```python
 path('polls_v2/', include('polls_v2.urls', namespace='polls_v2'))
 ```
