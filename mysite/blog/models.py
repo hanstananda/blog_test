@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -13,12 +14,8 @@ class Category(models.Model):
         ordering = ["-category_name"]
 
 
-class User(models.Model):
-    user_name = models.CharField(max_length=25, primary_key=True)
-    password = models.CharField(max_length=25)
-    email = models.CharField(max_length=25)
-    First_Name = models.CharField(max_length=25, default=None, blank=True, null=True)
-    Last_Name = models.CharField(max_length=25, default=None, blank=True, null=True)
+class UserProfile(models.Model):
+    user_name = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     user_image = models.ImageField(default=None, blank=True, null=True)
 
     def __str__(self):

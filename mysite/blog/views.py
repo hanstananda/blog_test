@@ -2,9 +2,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from .models import Post, Category, User
+from .models import Post, Category
 from django.db.models import CharField, Value
 from .forms import NameForm
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.http import HttpResponse
 
@@ -28,6 +30,9 @@ class CategoryPostList(generic.ListView):
     template_name = 'blog/index.html'
     context_object_name = 'items_list'
 
+    def __init__(self):
+        self.category = None
+
     def get_queryset(self):
         self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
         posts = Post.objects.filter(category=self.category)
@@ -43,6 +48,11 @@ class CategoryPostList(generic.ListView):
         context['category'] = self.category
         return context
 
+    @login_required()
+    def show_user(self):
+        pass
+
+
 
 def login(request):
     # if this is a POST request we need to process the form data
@@ -51,15 +61,11 @@ def login(request):
         form = NameForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            try:
-                check = User.objects.filter(user_name=email, password=password)
-                if len(check) > 0:
-                    return HttpResponseRedirect(reverse('blog:success'))
-            except:
-                pass
-            return HttpResponseRedirect(reverse('blog:fail'))
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                return HttpResponseRedirect(reverse('blog:success'))
         return HttpResponseRedirect(reverse('blog:fail'))
 
     else:
