@@ -65,20 +65,23 @@
                                                 <form action="{% url 'blog:like_view' %}" method="post">
                                                     {% csrf_token %}
                                                     <div class="ui labeled button" tabindex="0">
-                                                        <div class="ui button">
+                                                        <button class="ui button">
                                                             <i class="heart icon"></i> Like
-                                                        </div>
+                                                        </button>
                                                         <a class="ui basic label">
                                                             {{item.num_likes}}
                                                         </a>
                                                     </div>
                                                 </form>
-
                                             {% endif %}
-
                                         </div>
                                         <div class="ui right floated">
-                                            Comment
+                                            <form action="{% url 'blog:comment_view' %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="ui primary submit labeled icon button">
+                                                    <i class="icon edit"></i> Add Comment
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -56,12 +56,17 @@ class CategoryPostList(generic.ListView):
         self.user_profile = None
 
     def get_queryset(self):
+        self.posts_liked = []
         self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
         self.posts = Post.objects.filter(category=self.category)[:5]
         self.categories = Category.objects.all()[:5]
         self.likes =Likes.objects.all()
         if self.request.user.is_authenticated:
             self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
+            for item in self.posts:
+                temp = item.likes_set.values().filter(liked_on_id=item.id, liked_by=self.request.user.id).count()
+                if temp > 0:
+                    self.posts_liked += list([item.post_title])
         else:
             self.user_profile = None
         all_items = []
@@ -74,6 +79,7 @@ class CategoryPostList(generic.ListView):
         context['category'] = self.category
         context['user_profile'] = self.user_profile
         context['posts'] = self.posts
+        context['posts_liked'] = self.posts_liked
         context['categories'] = self.categories
         return context
 
@@ -104,18 +110,23 @@ def login_view(request):
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
-
 def like(request):
-    if request.method == 'POST':
-        return HttpResponseRedirect(reverse('blog:index'))
+    if request.method == 'POST' and request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('blog:success'))
     else:
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
-
 def unlike(request):
+    if request.method == 'POST'and request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
+def comment(request):
     if request.method == 'POST':
-        return HttpResponseRedirect(reverse('blog:index'))
+        return HttpResponseRedirect(reverse('blog:success'))
     else:
         return HttpResponseRedirect(reverse('blog:fail'))
 
