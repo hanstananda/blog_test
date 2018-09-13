@@ -112,13 +112,31 @@ def login_view(request):
 
 def like(request):
     if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            post_id = request.POST.get('post_id', '')
+            user_id = request.POST.get('user_id', '')
+            like_from_request = Likes(liked_on=get_object_or_404(Post, id=post_id),
+                                      liked_by=get_object_or_404(User, id=user_id))
+            like_from_request.save()
+
+        except:
+            return HttpResponseRedirect(reverse('blog:fail'))
         return HttpResponseRedirect(reverse('blog:success'))
     else:
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
 def unlike(request):
-    if request.method == 'POST'and request.user.is_authenticated:
+    if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            like_from_request = Likes.objects.filter(liked_on=request.POST.get('post_id', ''),
+                                                     liked_by=request.POST.get('user_id', ''))
+            if like_from_request.count() > 0:
+                like_from_request.delete()
+            else:
+                raise ModuleNotFoundError
+        except:
+            return HttpResponseRedirect(reverse('blog:fail'))
         return HttpResponseRedirect(reverse('blog:success'))
     else:
         return HttpResponseRedirect(reverse('blog:fail'))

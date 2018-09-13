@@ -52,6 +52,8 @@
                                             {% if item.post_title in posts_liked %}
                                                 <form action="{% url 'blog:unlike_view' %}" method="post">
                                                     {% csrf_token %}
+                                                    <input type="hidden" name="post_id" value="{{ item.id }}" />
+                                                    <input type="hidden" name="user_id" value="{{ user.id }}"/>
                                                     <div class="ui labeled button" tabindex="0">
                                                         <button class="ui red button">
                                                             <i class="heart icon"></i> Liked
@@ -64,6 +66,8 @@
                                             {% else %}
                                                 <form action="{% url 'blog:like_view' %}" method="post">
                                                     {% csrf_token %}
+                                                    <input type="hidden" name="post_id" value="{{ item.id }}" />
+                                                    <input type="hidden" name="user_id" value="{{ user.id }}"/>
                                                     <div class="ui labeled button" tabindex="0">
                                                         <button class="ui button">
                                                             <i class="heart icon"></i> Like
