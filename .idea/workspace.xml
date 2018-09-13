@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1427959b-3f0d-47b9-9ba0-3b706a4ab61e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/blog/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/blog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/blog/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls_v2/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/polls_v2/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/templates/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/blog/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -114,7 +107,7 @@
           <entry key="Django Console" value="752" />
           <entry key="dummy" value="7" />
           <entry key="gitignore" value="2" />
-          <entry key="html" value="3256" />
+          <entry key="html" value="3258" />
           <entry key="md" value="818" />
           <entry key="py" value="5717" />
           <entry key="py@blog_test" value="1553" />
@@ -124,7 +117,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CommandLine" value="1396" />
-          <entry key="HTML" value="3256" />
+          <entry key="HTML" value="3258" />
           <entry key="Markdown" value="799" />
           <entry key="PLAIN_TEXT" value="179" />
           <entry key="Python" value="6488" />
@@ -205,8 +198,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mysite/templates/blog/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="58" column="58" selection-start-line="58" selection-start-column="57" selection-end-line="58" selection-end-column="58" />
+            <state relative-caret-position="392">
+              <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -534,14 +527,14 @@
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.329718" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3286334" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.4978678" visible="true" weight="0.324295" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4978678" weight="0.324295" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="manage.py@blog_test" order="9" sideWeight="0.49850747" weight="0.318872" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.31995663" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.31995663" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5021322" side_tool="true" weight="0.324295" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.30477223" />
       <window_info anchor="bottom" id="TODO" order="13" weight="0.3275488" />
@@ -941,8 +934,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mysite/templates/blog/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="58" column="58" selection-start-line="58" selection-start-column="57" selection-end-line="58" selection-end-column="58" />
+        <state relative-caret-position="392">
+          <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
         </state>
       </provider>
     </entry>

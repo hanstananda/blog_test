@@ -54,25 +54,24 @@
                                                     {% csrf_token %}
                                                     <div class="ui labeled button" tabindex="0">
                                                         <button class="ui red button">
-                                                            <i class="heart icon"></i> Like
+                                                            <i class="heart icon"></i> Liked
                                                         </button>
                                                         <a class="ui basic red left pointing label">
                                                             {{item.num_likes}}
                                                         </a>
                                                     </div>
-                                                    <a href="{% url 'blog:unlike_view' %}">
-                                                        {{item.num_likes}} like(s)
-                                                        <i class="thumbs up icon"></i>
-                                                    </a>
                                                 </form>
-
                                             {% else %}
                                                 <form action="{% url 'blog:like_view' %}" method="post">
                                                     {% csrf_token %}
-                                                    <a href="{% url 'blog:like_view' %}">
-                                                        {{item.num_likes}} like(s)
-                                                        <i class="thumbs up outline icon"></i>
-                                                    </a>
+                                                    <div class="ui labeled button" tabindex="0">
+                                                        <div class="ui button">
+                                                            <i class="heart icon"></i> Like
+                                                        </div>
+                                                        <a class="ui basic label">
+                                                            {{item.num_likes}}
+                                                        </a>
+                                                    </div>
                                                 </form>
 
                                             {% endif %}
