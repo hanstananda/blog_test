@@ -2,11 +2,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from .models import Post, Category, UserProfile
+from .models import Post, Category, UserProfile, Comments, Likes
 from django.db.models import CharField, Value
 from .forms import NameForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout
+from django.db.models import Count
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -21,14 +22,18 @@ class IndexView(generic.ListView):
     context_object_name = 'items_list'
 
     def get_queryset(self):
-        posts = Post.objects.annotate(type=Value('post', CharField()))
-        categories = Category.objects.annotate(type=Value('category', CharField()))
-        all_items = list(posts) + list(categories)
-        # user_profile = get_object_or_404(UserProfile, user_name=self.kwargs['user'])
+        self.posts_liked = []
+        self.posts = Post.objects.all().annotate(num_likes=Count('likes'))[:5]
+        self.categories = Category.objects.all()[:5]
         if self.request.user.is_authenticated:
             self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
+            for item in self.posts:
+                temp = item.likes_set.values().filter(liked_on_id=item.id, liked_by=self.request.user.id).count()
+                if temp > 0:
+                    self.posts_liked += list([item.post_title])
         else:
             self.user_profile = None
+        all_items = []
         return all_items
 
     def get_context_data(self, **kwargs):
@@ -36,6 +41,9 @@ class IndexView(generic.ListView):
         context = super().get_context_data(**kwargs)
         # Add in the category
         context['user_profile'] = self.user_profile
+        context['posts'] = self.posts
+        context['posts_liked'] = self.posts_liked
+        context['categories'] = self.categories
         return context
 
 
@@ -49,14 +57,14 @@ class CategoryPostList(generic.ListView):
 
     def get_queryset(self):
         self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
-        posts = Post.objects.filter(category=self.category)
-        posts = posts.annotate(type=Value('post', CharField()))
-        categories = Category.objects.annotate(type=Value('category', CharField()))
-        all_items = list(posts) + list(categories)
+        self.posts = Post.objects.filter(category=self.category)[:5]
+        self.categories = Category.objects.all()[:5]
+        self.likes =Likes.objects.all()
         if self.request.user.is_authenticated:
             self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
         else:
             self.user_profile = None
+        all_items = []
         return all_items
 
     def get_context_data(self, **kwargs):
@@ -65,6 +73,8 @@ class CategoryPostList(generic.ListView):
         # Add in the category
         context['category'] = self.category
         context['user_profile'] = self.user_profile
+        context['posts'] = self.posts
+        context['categories'] = self.categories
         return context
 
 
@@ -94,9 +104,27 @@ def login_view(request):
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
+
+def like(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect(reverse('blog:index'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
+
+def unlike(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect(reverse('blog:index'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
 def success(request):
     return render(request, 'blog/success.html')
 
 
 def fail(request):
     return render(request, 'blog/fail.html')
+
+# Get Query for Liked on a post Likes.objects.filter(liked_on=get_object_or_404(Post,post_title='Test'))

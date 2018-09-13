@@ -38,7 +38,7 @@ class Likes(models.Model):
     liked_on = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.liked_by+self.liked_on
+        return self.liked_by.username+self.liked_on.post_title
 
     class Meta:
         unique_together = ('liked_by', 'liked_on')
@@ -47,6 +47,7 @@ class Likes(models.Model):
 class Comments(models.Model):
     commented_by = models.ForeignKey(User, on_delete=models.CASCADE)
     commented_on = models.ForeignKey(Post, on_delete=models.CASCADE)
+    comment_content = models.TextField(max_length=1000)
 
     def __str__(self):
-        return self.commented_by+self.commented_on
+        return self.commented_by.username+self.commented_on.post_title

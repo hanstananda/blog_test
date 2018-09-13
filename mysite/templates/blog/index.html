@@ -20,15 +20,13 @@
     <div class="ui three column grid">
         <div class="four wide column">
             <h2>Categories</h2>
-            {% if items_list %}
+            {% if categories %}
                 <div class="ui link list">
-                    {% for item in items_list %}
-                        {% if item.type == 'category' %}
-                            {% if category.category_name == item.category_name %}
-                                <div class="active item" href="{% url 'blog:category' item.id %}">{{ item.category_name }}</div>
-                            {% else %}
-                                <a class ="item" href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a>
-                            {% endif %}
+                    {% for item in categories %}
+                        {% if category.category_name == item.category_name %}
+                            <div class="active item" href="{% url 'blog:category' item.id %}">{{ item.category_name }}</div>
+                        {% else %}
+                            <a class ="item" href="{% url 'blog:category' item.id %}">{{ item.category_name }}</a>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -37,33 +35,57 @@
             {% endif %}
         </div>
         <div class="eight wide column">
-            {% if items_list %}
-                {% for item in items_list %}
-                    {% if item.type == 'post' %}
-                        <div class="ui segment">
-                            <div class="ui items">
-                                <div class="item">
-                                    <div class="content">
-                                        <a class="header">
-                                            {{ item.post_title }}
-                                        </a>
-                                        <div class="description">
-                                            <p>{{ item.post_content }}</p>
+            {% if posts %}
+                {% for item in posts %}
+                    <div class="ui segment">
+                        <div class="ui items">
+                            <div class="item">
+                                <div class="content">
+                                    <a class="header">
+                                        {{ item.post_title }}
+                                    </a>
+                                    <div class="description">
+                                        <p>{{ item.post_content }}</p>
+                                    </div>
+                                    <div class="extra">
+                                        <div class="ui left floated">
+                                            {% if item.post_title in posts_liked %}
+                                                <form action="{% url 'blog:unlike_view' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="ui labeled button" tabindex="0">
+                                                        <button class="ui red button">
+                                                            <i class="heart icon"></i> Like
+                                                        </button>
+                                                        <a class="ui basic red left pointing label">
+                                                            {{item.num_likes}}
+                                                        </a>
+                                                    </div>
+                                                    <a href="{% url 'blog:unlike_view' %}">
+                                                        {{item.num_likes}} like(s)
+                                                        <i class="thumbs up icon"></i>
+                                                    </a>
+                                                </form>
+
+                                            {% else %}
+                                                <form action="{% url 'blog:like_view' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <a href="{% url 'blog:like_view' %}">
+                                                        {{item.num_likes}} like(s)
+                                                        <i class="thumbs up outline icon"></i>
+                                                    </a>
+                                                </form>
+
+                                            {% endif %}
+
                                         </div>
-                                        <div class="extra">
-                                            <div class="ui left floated">
-                                                <i class="thumbs up icon"></i>
-                                                0 like(s)
-                                            </div>
-                                            <div class="ui right floated">
-                                                Comment
-                                            </div>
+                                        <div class="ui right floated">
+                                            Comment
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
+                    </div>
                 {% endfor %}
             {% else %}
                 Unknown error occurred.
