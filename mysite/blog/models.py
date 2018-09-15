@@ -48,6 +48,7 @@ class Comments(models.Model):
     commented_by = models.ForeignKey(User, on_delete=models.CASCADE)
     commented_on = models.ForeignKey(Post, on_delete=models.CASCADE)
     comment_content = models.TextField(max_length=1000)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.commented_by.username+self.commented_on.post_title

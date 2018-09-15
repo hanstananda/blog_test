@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1427959b-3f0d-47b9-9ba0-3b706a4ab61e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/mysite/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/blog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/blog/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/blog/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/templates/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/blog/index.html" afterDir="false" />
@@ -86,7 +88,7 @@
           <entry key="md" value="5" />
           <entry key="polls_question" value="1" />
           <entry key="polls_v2_question" value="1" />
-          <entry key="py" value="75" />
+          <entry key="py" value="77" />
           <entry key="sql" value="1" />
           <entry key="sqlite_master" value="1" />
           <entry key="sqlite_sequence" value="1" />
@@ -100,7 +102,7 @@
           <entry key="Image" value="2" />
           <entry key="Markdown" value="5" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="75" />
+          <entry key="Python" value="77" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -109,20 +111,20 @@
           <entry key="Django Console" value="752" />
           <entry key="dummy" value="7" />
           <entry key="gitignore" value="2" />
-          <entry key="html" value="3418" />
+          <entry key="html" value="3852" />
           <entry key="md" value="818" />
-          <entry key="py" value="6177" />
-          <entry key="py@blog_test" value="1553" />
+          <entry key="py" value="6841" />
+          <entry key="py@blog_test" value="1597" />
           <entry key="txt" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CommandLine" value="1396" />
-          <entry key="HTML" value="3418" />
+          <entry key="CommandLine" value="1439" />
+          <entry key="HTML" value="3852" />
           <entry key="Markdown" value="799" />
-          <entry key="PLAIN_TEXT" value="179" />
-          <entry key="Python" value="6948" />
+          <entry key="PLAIN_TEXT" value="180" />
+          <entry key="Python" value="7612" />
         </counts>
       </usages-collector>
     </session>
@@ -135,13 +137,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mysite/blog/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="46" column="13" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="13" />
+            <state relative-caret-position="150">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="13" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-                <marker date="1536776311611" expanded="true" signature="333:558" ph="..." />
-                <marker date="1536776311611" expanded="true" signature="633:634" ph="..." />
-                <marker date="1536776311611" expanded="true" signature="956:1174" ph="..." />
+                <marker date="1537019210369" expanded="true" signature="333:558" ph="..." />
+                <marker date="1537019210369" expanded="true" signature="633:634" ph="..." />
+                <marker date="1537019210369" expanded="true" signature="956:1174" ph="..." />
               </folding>
             </state>
           </provider>
@@ -162,34 +164,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mysite/mysite/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mysite/blog/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-                <marker date="1536866959895" expanded="true" signature="1817:1818" ph="..." />
-                <marker date="1536866959895" expanded="true" signature="1962:2001" ph="..." />
-                <marker date="1536866959895" expanded="true" signature="1995:2001" ph="..." />
-                <marker date="1536866959895" expanded="true" signature="5455:5620" ph="..." />
-                <marker date="1536866959895" expanded="true" signature="5641:5646" ph="..." />
-              </folding>
+            <state relative-caret-position="-1071">
+              <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mysite/blog/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="201">
+              <caret line="100" column="71" selection-start-line="100" selection-start-column="71" selection-end-line="100" selection-end-column="71" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+                <marker date="1537021372381" expanded="true" signature="1813:1814" ph="..." />
+                <marker date="1537021372381" expanded="true" signature="1958:1997" ph="..." />
+                <marker date="1537021372381" expanded="true" signature="1991:1997" ph="..." />
+                <marker date="1537021372381" expanded="true" signature="3242:4927" ph="..." />
+                <marker date="1537021372381" expanded="true" signature="7244:7409" ph="..." />
+                <marker date="1537021372381" expanded="true" signature="7430:7435" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mysite/blog/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
+            <state relative-caret-position="289">
+              <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -209,8 +212,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mysite/templates/blog/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="54" column="86" selection-start-line="54" selection-start-column="86" selection-end-line="54" selection-end-column="86" />
+            <state relative-caret-position="60">
+              <caret line="83" column="93" selection-start-line="83" selection-start-column="93" selection-end-line="83" selection-end-column="93" />
             </state>
           </provider>
         </entry>
@@ -247,7 +250,10 @@
       <find>like</find>
       <find>User</find>
       <find>login</find>
+      <find>category</find>
+      <find>self.post</find>
       <find>comment</find>
+      <find>filter</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -288,12 +294,12 @@
         <option value="$PROJECT_DIR$/mysite/mysite/urls.py" />
         <option value="$PROJECT_DIR$/mysite/templates/blog/success.html" />
         <option value="$PROJECT_DIR$/mysite/blog/admin.py" />
-        <option value="$PROJECT_DIR$/mysite/blog/models.py" />
         <option value="$PROJECT_DIR$/mysite/polls_v2/views.py" />
-        <option value="$PROJECT_DIR$/mysite/blog/urls.py" />
         <option value="$PROJECT_DIR$/mysite/templates/blog/fail.html" />
-        <option value="$PROJECT_DIR$/mysite/templates/blog/index.html" />
+        <option value="$PROJECT_DIR$/mysite/blog/models.py" />
         <option value="$PROJECT_DIR$/mysite/blog/views.py" />
+        <option value="$PROJECT_DIR$/mysite/templates/blog/index.html" />
+        <option value="$PROJECT_DIR$/mysite/blog/urls.py" />
       </list>
     </option>
   </component>
@@ -311,9 +317,9 @@
       <path value="$PROJECT_DIR$/mysite/mysite/static/semantic/tasks/config/admin/templates/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="322" />
-    <option name="y" value="-29" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-96" />
+    <option name="y" value="70" />
     <option name="width" value="1891" />
     <option name="height" value="1000" />
   </component>
@@ -542,16 +548,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-96" y="70" width="1891" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.19083156" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.19552158" />
       <window_info id="Structure" order="1" sideWeight="0.50080776" side_tool="true" weight="0.18390192" />
       <window_info id="Favorites" order="2" sideWeight="0.50080776" side_tool="true" weight="0.18390192" />
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.329718" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3286334" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4978678" weight="0.324295" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4978678" visible="true" weight="0.3452656" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -560,7 +566,7 @@
       <window_info anchor="bottom" id="manage.py@blog_test" order="9" sideWeight="0.49850747" weight="0.318872" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.31995663" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5021322" side_tool="true" weight="0.324295" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.30477223" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.30477223" />
       <window_info anchor="bottom" id="TODO" order="13" weight="0.3275488" />
       <window_info anchor="bottom" id="Database Changes" order="14" type="SLIDING" weight="0.324295" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -904,17 +910,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mysite/templates/blog/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="54" column="86" selection-start-line="54" selection-start-column="86" selection-end-line="54" selection-end-column="86" />
+        <state relative-caret-position="60">
+          <caret line="83" column="93" selection-start-line="83" selection-start-column="93" selection-end-line="83" selection-end-column="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/blog/urls.py">
+    <entry file="file://$PROJECT_DIR$/mysite/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
+        <state relative-caret-position="201">
+          <caret line="100" column="71" selection-start-line="100" selection-start-column="71" selection-end-line="100" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+            <marker date="1537021372381" expanded="true" signature="1813:1814" ph="..." />
+            <marker date="1537021372381" expanded="true" signature="1958:1997" ph="..." />
+            <marker date="1537021372381" expanded="true" signature="1991:1997" ph="..." />
+            <marker date="1537021372381" expanded="true" signature="3242:4927" ph="..." />
+            <marker date="1537021372381" expanded="true" signature="7244:7409" ph="..." />
+            <marker date="1537021372381" expanded="true" signature="7430:7435" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/blog/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="13" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
+            <marker date="1537019210369" expanded="true" signature="333:558" ph="..." />
+            <marker date="1537019210369" expanded="true" signature="633:634" ph="..." />
+            <marker date="1537019210369" expanded="true" signature="956:1174" ph="..." />
           </folding>
         </state>
       </provider>
@@ -931,35 +956,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mysite/mysite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+        <state relative-caret-position="-1071">
+          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/blog/models.py">
+    <entry file="file://$PROJECT_DIR$/mysite/blog/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="46" column="13" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="13" />
+        <state relative-caret-position="289">
+          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <marker date="1536776311611" expanded="true" signature="333:558" ph="..." />
-            <marker date="1536776311611" expanded="true" signature="633:634" ph="..." />
-            <marker date="1536776311611" expanded="true" signature="956:1174" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/blog/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="116" column="53" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-            <marker date="1536866959895" expanded="true" signature="1817:1818" ph="..." />
-            <marker date="1536866959895" expanded="true" signature="1962:2001" ph="..." />
-            <marker date="1536866959895" expanded="true" signature="1995:2001" ph="..." />
-            <marker date="1536866959895" expanded="true" signature="5455:5620" ph="..." />
-            <marker date="1536866959895" expanded="true" signature="5641:5646" ph="..." />
           </folding>
         </state>
       </provider>

@@ -24,7 +24,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         self.posts_liked = []
         self.posts = Post.objects.all().annotate(num_likes=Count('likes'))[:5]
-        self.categories = Category.objects.all()[:5]
+        self.categories = Category.objects.all()
         if self.request.user.is_authenticated:
             self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
             for item in self.posts:
@@ -59,7 +59,7 @@ class CategoryPostList(generic.ListView):
         self.posts_liked = []
         self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
         self.posts = Post.objects.filter(category=self.category)[:5]
-        self.categories = Category.objects.all()[:5]
+        self.categories = Category.objects.all()
         self.likes =Likes.objects.all()
         if self.request.user.is_authenticated:
             self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
@@ -83,6 +83,47 @@ class CategoryPostList(generic.ListView):
         context['categories'] = self.categories
         return context
 
+
+class PostView(generic.ListView):
+    template_name = 'blog/index.html'
+    context_object_name = 'items_list'
+
+    def __init__(self):
+        self.user_profile = None
+
+    def get_queryset(self):
+        self.posts_liked = []
+        self.posts = Post.objects.filter(pk=self.kwargs['pk'])
+        self.post=get_object_or_404(Post, pk=self.kwargs['pk'])
+        self.users_profile = UserProfile.objects.all()
+        self.category = get_object_or_404(Category, pk=self.post.category.id)
+        self.categories = Category.objects.all().filter()
+        self.comments = Comments.objects.filter(commented_on=self.post)
+        self.likes = Likes.objects.all()
+        if self.request.user.is_authenticated:
+            self.user_profile = get_object_or_404(UserProfile, user_name=self.request.user)
+            for item in self.posts:
+                temp = item.likes_set.values().filter(liked_on_id=item.id, liked_by=self.request.user.id).count()
+                if temp > 0:
+                    self.posts_liked += list([item.post_title])
+        else:
+            self.user_profile = None
+        all_items = []
+        return all_items
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in the category
+        context['user_profile'] = self.user_profile
+        context['posts'] = self.posts
+        context['post'] = self.post
+        context['posts_liked'] = self.posts_liked
+        context['categories'] = self.categories
+        context['category'] = self.category
+        context['comments'] = self.comments
+        context['users_profile'] = self.users_profile
+        return context
 
 def logout_view(request):
     if request.method == 'POST':
@@ -118,7 +159,7 @@ def like(request):
             like_from_request = Likes(liked_on=get_object_or_404(Post, id=post_id),
                                       liked_by=get_object_or_404(User, id=user_id))
             like_from_request.save()
-
+            # Note: No checking between user_id sent and user authenticated yet
         except:
             return HttpResponseRedirect(reverse('blog:fail'))
         return HttpResponseRedirect(reverse('blog:success'))

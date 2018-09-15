@@ -41,7 +41,7 @@
                         <div class="ui items">
                             <div class="item">
                                 <div class="content">
-                                    <a class="header">
+                                    <a class="header" href="{% url 'blog:post' item.id%}">
                                         {{ item.post_title }}
                                     </a>
                                     <div class="description">
@@ -80,18 +80,57 @@
                                             {% endif %}
                                         </div>
                                         <div class="ui right floated">
-                                            <form action="{% url 'blog:comment_view' %}" method="post">
-                                                {% csrf_token %}
-                                                <button class="ui primary submit labeled icon button">
-                                                    <i class="icon edit"></i> Add Comment
-                                                </button>
-                                            </form>
+                                            {% if not comments %}
+                                                <form action="{% url 'blog:comment_view' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button class="ui primary submit labeled icon button">
+                                                        <i class="icon edit"></i> Comment...
+                                                    </button>
+                                                </form>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% if comments %}
+                        <div class="ui comments">
+                            <h3 class="ui dividing header">Comments</h3>
+                            <form class="ui reply form">
+                                {% csrf_token %}
+                                <div class="field">
+                                    <textarea></textarea>
+                                </div>
+                                <button class="ui blue labeled submit icon button">
+                                    <i class="icon edit"></i> Add Comment
+                                </button>
+                            </form>
+                            {% for item in comments %}
+                                <div class="comment">
+                                    <a class="avatar">
+                                        {% if item.user_image is None %}
+                                            <img src="{% static 'default.jpg' %}">
+                                        {% else %}
+                                            <img src="{{ item.user_image }}">
+                                        {% endif %}
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">{{ item.commented_by.username }}</a>
+                                        <div class="metadata">
+                                            <span class="date">{{ item.updated_at }}</span>
+                                        </div>
+                                        <div class="text">
+                                            {{ item.comment_content }}
+                                        </div>
+                                        <!-- <div class="actions">
+                                            <a class="reply">Add comment</a>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 Unknown error occurred.
