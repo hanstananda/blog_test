@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                    {% if comments %}
+                    {% if post %}
                         <div class="ui comments">
                             <h3 class="ui dividing header">Comments</h3>
                             <form class="ui reply form" id="comment_form" action ="{% url 'blog:add_comment_view' %}" method="post">
