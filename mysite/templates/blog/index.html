@@ -81,12 +81,8 @@
                                         </div>
                                         <div class="ui right floated">
                                             {% if not comments %}
-                                                <form action="{% url 'blog:comment_view' %}" method="post">
-                                                    {% csrf_token %}
-                                                    <button class="ui primary submit labeled icon button">
-                                                        <i class="icon edit"></i> Comment...
-                                                    </button>
-                                                </form>
+                                                <a class="ui primary submit labeled icon button" href="{% url 'blog:post' item.id%}">
+                                                    <i class="icon edit"></i> Comment...</a>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -97,10 +93,12 @@
                     {% if comments %}
                         <div class="ui comments">
                             <h3 class="ui dividing header">Comments</h3>
-                            <form class="ui reply form">
+                            <form class="ui reply form" id="comment_form" action ="{% url 'blog:add_comment_view' %}" method="post">
                                 {% csrf_token %}
+                                <input type="hidden" name="post_id" value="{{ item.id }}" />
+                                <input type="hidden" name="user_id" value="{{ user.id }}"/>
                                 <div class="field">
-                                    <textarea></textarea>
+                                    <textarea name="comment" form="comment_form"></textarea>
                                 </div>
                                 <button class="ui blue labeled submit icon button">
                                     <i class="icon edit"></i> Add Comment
@@ -108,13 +106,11 @@
                             </form>
                             {% for item in comments %}
                                 <div class="comment">
-                                    <a class="avatar">
-                                        {% if item.user_image is None %}
-                                            <img src="{% static 'default.jpg' %}">
-                                        {% else %}
-                                            <img src="{{ item.user_image }}">
-                                        {% endif %}
-                                    </a>
+                                    {% if item.user_image is None %}
+                                        <img src="{% static 'default.jpg' %}" max-width="100%" width = "35" height="auto" >
+                                    {% else %}
+                                        <img src="{{ item.user_image }}" max-width="100%"  height="auto">
+                                    {% endif %}
                                     <div class="content">
                                         <a class="author">{{ item.commented_by.username }}</a>
                                         <div class="metadata">

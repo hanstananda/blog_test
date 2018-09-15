@@ -14,6 +14,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout_view'),
     path('unlike/', views.unlike, name='unlike_view'),
     path('like/', views.like, name='like_view'),
-    path('comment/',views.comment, name='comment_view'),
     path('add_comment/', views.add_comment, name='add_comment_view'),
 ]

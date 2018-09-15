@@ -151,6 +151,26 @@ def login_view(request):
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
+def add_comment(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            post_id = request.POST.get('post_id', '')
+            user_id = request.POST.get('user_id', '')
+            comment_text = request.POST.get('comment', '')
+            if(len(comment_text)<10):
+                raise ModuleNotFoundError
+            like_from_request = Comments(commented_on=get_object_or_404(Post, id=post_id),
+                                      commented_by=get_object_or_404(User, id=user_id),
+                                      comment_content=comment_text,
+                                      )
+            like_from_request.save()
+        except:
+            return HttpResponseRedirect(reverse('blog:fail'))
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
 def like(request):
     if request.method == 'POST' and request.user.is_authenticated:
         try:
@@ -183,11 +203,11 @@ def unlike(request):
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
-def comment(request):
+"""def comment(request):
     if request.method == 'POST':
         return HttpResponseRedirect(reverse('blog:success'))
     else:
-        return HttpResponseRedirect(reverse('blog:fail'))
+        return HttpResponseRedirect(reverse('blog:fail'))"""
 
 
 def success(request):
@@ -196,5 +216,6 @@ def success(request):
 
 def fail(request):
     return render(request, 'blog/fail.html')
+
 
 # Get Query for Liked on a post Likes.objects.filter(liked_on=get_object_or_404(Post,post_title='Test'))
