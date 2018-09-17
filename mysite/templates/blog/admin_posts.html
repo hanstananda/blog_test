@@ -8,7 +8,7 @@
                 Name
             </th>
             <th>
-                Post Count
+                Comments Count
             </th>
             <th>
                 Created at
@@ -18,10 +18,10 @@
             </th>
         </tr>
         </thead>
-        {% for item in categories %}
+        {% for item in posts %}
             <tr>
-                <td data-label="Name">{{ item.category_name }}</td>
-                <td data-label="Post Count">{{ item.num_posts }}</td>
+                <td data-label="Name">{{ item.post_title }}</td>
+                <td data-label="Comments Count">{{ item.num_comments }}</td>
                 <td data-label="Created at">{{ item.pub_date }}</td>
                 <td data-label="Action"><a>Edit</a> <a>Delete</a></td>
             </tr>

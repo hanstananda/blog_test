@@ -18,6 +18,7 @@ class Category(models.Model):
 class UserProfile(models.Model):
     user_name = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     user_image = models.ImageField(default=None, blank=True, null=True)
+    matric_number = models.CharField(max_length=20)
     join_date = models.DateTimeField('date joined')
     def __str__(self):
         return self.user_name.username

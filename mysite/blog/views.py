@@ -134,14 +134,14 @@ def admin_view(request):
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
-class PostsAdminView(generic.ListView):
-    template_name = 'blog/admin.html'
-
-    def get_queryset(self):
-        pass
+class PostsAdminView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_posts.html'
 
     def get_context_data(self, **kwargs):
-        pass
+        self.posts = Post.objects.all().annotate(num_comments=Count('comments'))
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.posts
+        return context
 
 
 class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
@@ -151,6 +151,16 @@ class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
         self.categories = Category.objects.all().annotate(num_posts=Count('post'))[:5]
         context = super().get_context_data(**kwargs)
         context['categories'] = self.categories
+        return context
+
+
+class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_users.html'
+
+    def get_context_data(self, **kwargs):
+        self.users = UserProfile.objects.all()
+        context = super().get_context_data(**kwargs)
+        context['users'] = self.users
         return context
 
 

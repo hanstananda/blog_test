@@ -5,8 +5,8 @@
         <div class="four wide column">
             <div class="ui link list">
                 <a class ="item" href="{% url 'blog:CategoriesAdminView' %}">Categories</a>
-                <a class ="item" href="">Posts</a>
-                <a class ="item" href="">Users</a>
+                <a class ="item" href="{% url 'blog:PostsAdminView' %}">Posts</a>
+                <a class ="item" href="{% url 'blog:UsersAdminView' %}">Users</a>
             </div>
         </div>
         <div class="twelve wide column">

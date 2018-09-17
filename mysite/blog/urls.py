@@ -18,5 +18,5 @@ urlpatterns = [
     path('admin/', views.admin_view, name='admin-site'),
     path('admin/categories/', views.CategoriesAdminView.as_view(), name='CategoriesAdminView'),
     path('admin/posts/', views.PostsAdminView.as_view(), name='PostsAdminView'),
-    path('admin/users/', views.PostsAdminView.as_view(), name='PostsAdminView'),
+    path('admin/users/', views.UsersAdminView.as_view(), name='UsersAdminView'),
 ]
