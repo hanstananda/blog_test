@@ -144,13 +144,11 @@ class PostsAdminView(generic.ListView):
         pass
 
 
-class CategoriesAdminView(LoginRequiredMixin, generic.ListView):
+class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin.html'
 
-    def get_queryset(self):
-        self.categories = Category.objects.all()
-
     def get_context_data(self, **kwargs):
+        self.categories = Category.objects.all()
         context = super().get_context_data(**kwargs)
         context['categories'] = self.categories
         return context

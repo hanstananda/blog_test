@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     category_name = models.CharField(max_length=100)
+    pub_date = models.DateTimeField('date created')
 
     def __str__(self):
         return self.category_name
@@ -17,7 +18,7 @@ class Category(models.Model):
 class UserProfile(models.Model):
     user_name = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     user_image = models.ImageField(default=None, blank=True, null=True)
-
+    join_date = models.DateTimeField('date joined')
     def __str__(self):
         return self.user_name.username
 
