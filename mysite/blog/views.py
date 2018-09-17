@@ -145,10 +145,10 @@ class PostsAdminView(generic.ListView):
 
 
 class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'blog/admin.html'
+    template_name = 'blog/admin_categories.html'
 
     def get_context_data(self, **kwargs):
-        self.categories = Category.objects.all()
+        self.categories = Category.objects.all().annotate(num_posts=Count('post'))[:5]
         context = super().get_context_data(**kwargs)
         context['categories'] = self.categories
         return context

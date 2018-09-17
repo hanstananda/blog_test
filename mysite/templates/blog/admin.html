@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
-<div class="ui grid">
+    <div class="ui grid">
         <div class="four wide column">
             <div class="ui link list">
                 <a class ="item" href="{% url 'blog:CategoriesAdminView' %}">Categories</a>
@@ -10,6 +10,8 @@
             </div>
         </div>
         <div class="twelve wide column">
+            {% block admin_content %}
+            {% endblock %}
         </div>
-</div>
+    </div>
 {% endblock %}

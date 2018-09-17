@@ -1,0 +1,30 @@
+{% extends 'blog/admin.html' %}
+{% load static %}
+{% block admin_content %}
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Post Count
+            </th>
+            <th>
+                Created at
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        </thead>
+        {% for item in categories %}
+            <tr>
+                <td data-label="Name">{{ item.category_name }}</td>
+                <td data-label="Name">{{ item.num_posts }}</td>
+                <td data-label="Post Count">{{ item.pub_date }}</td>
+                <td data-label="Action"><a>Edit</a> <a>Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
