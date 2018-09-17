@@ -15,4 +15,8 @@ urlpatterns = [
     path('unlike/', views.unlike, name='unlike_view'),
     path('like/', views.like, name='like_view'),
     path('add_comment/', views.add_comment, name='add_comment_view'),
+    path('admin/', views.admin_view, name='admin-site'),
+    path('admin/categories/', views.CategoriesAdminView.as_view(), name='CategoriesAdminView'),
+    path('admin/posts/', views.PostsAdminView.as_view(), name='PostsAdminView'),
+    path('admin/users/', views.PostsAdminView.as_view(), name='PostsAdminView'),
 ]

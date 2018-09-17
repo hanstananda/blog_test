@@ -8,10 +8,12 @@ from .forms import NameForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout
 from django.db.models import Count
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.template import loader
+from django.template import Template
 from django.http import HttpResponse
 
 # Create your views here.
@@ -48,7 +50,6 @@ class IndexView(generic.ListView):
 
 
 class CategoryPostList(generic.ListView):
-
     template_name = 'blog/index.html'
     context_object_name = 'items_list'
 
@@ -124,6 +125,36 @@ class PostView(generic.ListView):
         context['comments'] = self.comments
         context['users_profile'] = self.users_profile
         return context
+
+
+def admin_view(request):
+    if request.user.is_authenticated:
+        return render(request, 'blog/admin.html')
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
+class PostsAdminView(generic.ListView):
+    template_name = 'blog/admin.html'
+
+    def get_queryset(self):
+        pass
+
+    def get_context_data(self, **kwargs):
+        pass
+
+
+class CategoriesAdminView(LoginRequiredMixin, generic.ListView):
+    template_name = 'blog/admin.html'
+
+    def get_queryset(self):
+        self.categories = Category.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = self.categories
+        return context
+
 
 def logout_view(request):
     if request.method == 'POST':

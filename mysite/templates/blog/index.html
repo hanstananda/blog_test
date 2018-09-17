@@ -1,13 +1,6 @@
+{% extends 'blog/base.html' %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
-<script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-<script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
-
-<div class="ui container">
-    <h1 class="ui dividing header" ><a href="{% url 'blog:index' %}">MY COOL BLOG :)</a></h1>
+{% block content %}
     <div class="ui grid">
         <div class="sixteen wide right aligned column">
             <div class="ui action left icon input">
@@ -195,4 +188,4 @@
             {% endif %}
         </div>
     </div>
-</div>
+{% endblock %}
