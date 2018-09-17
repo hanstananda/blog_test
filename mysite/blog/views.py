@@ -154,13 +154,21 @@ class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
         return context
 
 
-class UserAdminView(LoginRequiredMixin, generic.TemplateView):
+class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin_users.html'
 
     def get_context_data(self, **kwargs):
-        self.users = UserProfile.objects.all()
+        self.users_profiles = UserProfile.objects.all()
+        self.users= []
+        for user in self.users_profiles:
+            num_post = Comments.objects.all().filter(commented_by=user.user_name).count()
+            user_changed = UserProfile.objects.all().filter(
+                user_name=user.user_name).annotate(num_posts=Value(num_post))  # use Value() to pass the number directly
+            self.users.append(user_changed)
+
         context = super().get_context_data(**kwargs)
         context['users'] = self.users
+        context['user_profiles'] = self.users_profiles
         return context
 
 
