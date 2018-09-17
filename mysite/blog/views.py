@@ -154,7 +154,7 @@ class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
         return context
 
 
-class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
+class UserAdminView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin_users.html'
 
     def get_context_data(self, **kwargs):
