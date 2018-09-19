@@ -4,14 +4,15 @@ from django.urls import reverse
 from django.views import generic
 from .models import Post, Category, UserProfile, Comments, Likes
 from django.db.models import CharField, Value
-from .forms import NameForm
+from .forms import NameForm, EditCategoryForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout
 from django.db.models import Count
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from django.contrib.auth.models import User
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.template import Template
 from django.http import HttpResponse
@@ -154,6 +155,64 @@ class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
         return context
 
 
+class CategoriesAdminCreate(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_categories_create.html'
+
+
+class CategoriesAdminEdit(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_categories_edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs['pk']
+        return context
+
+
+def add_category(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            category_name = request.POST.get('category', '')
+            pub_date = datetime.now()
+            category_from_request = Category(category_name=category_name, pub_date=pub_date)
+            category_from_request.save()
+        except:
+            return HttpResponseRedirect(reverse('blog:fail'))
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
+def delete_category(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            category_id = request.POST.get('category_id', '')
+            category_from_request = Category.objects.filter(id=category_id)
+            category_from_request.delete()
+        except:
+            return HttpResponseRedirect(reverse('blog:fail'))
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
+def edit_category(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        # form = EditCategoryForm(request.POST)
+        # check whether it's valid:
+        # if form.is_valid():
+        # category_name = form.cleaned_data['category_name']
+        # category_id = form.cleaned_data['category_id']
+        category_name = request.POST.get('category')
+        category_id = request.POST.get('category_id')
+        category_from_request = get_object_or_404(Category, id=category_id)
+        category_from_request.category_name = category_name
+        category_from_request.save()
+        return HttpResponseRedirect(reverse('blog:success'))
+        # return HttpResponseRedirect(reverse('blog:fail'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
 class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin_users.html'
 
@@ -162,13 +221,19 @@ class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
         self.users= []
         for user in self.users_profiles:
             num_post = Comments.objects.all().filter(commented_by=user.user_name).count()
-            user_changed = UserProfile.objects.all().filter(
-                user_name=user.user_name).annotate(num_posts=Value(num_post))  # use Value() to pass the number directly
+            user_changed = {
+                'user_name': user.user_name,
+                'join_date': user.join_date,
+                'matric_number': user.matric_number,
+                'num_posts': num_post,
+            }
+            # user_changed = UserProfile.objects.all().filter(
+            #    user_name=user.user_name).annotate(num_posts=Value(num_post))
+            #  use Value() to pass the number directly
             self.users.append(user_changed)
 
         context = super().get_context_data(**kwargs)
         context['users'] = self.users
-        context['user_profiles'] = self.users_profiles
         return context
 
 

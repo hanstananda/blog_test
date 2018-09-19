@@ -1,6 +1,11 @@
 {% extends 'blog/admin.html' %}
 {% load static %}
 {% block admin_content %}
+    <div style="text-align: right;">
+        <a href="{% url 'blog:CategoriesAdminCreate' %}">
+            <button class="ui blue button">Create</button>
+        </a>
+    </div>
     <table class="ui celled table">
         <thead>
         <tr>
@@ -23,7 +28,14 @@
                 <td data-label="Name">{{ item.category_name }}</td>
                 <td data-label="Post Count">{{ item.num_posts }}</td>
                 <td data-label="Created at">{{ item.pub_date }}</td>
-                <td data-label="Action"><a>Edit</a> <a>Delete</a></td>
+                <td data-label="Action">
+                    <a href="{% url 'blog:CategoriesAdminEdit' item.id%}"><button class="ui yellow button">Edit</button></a>
+                <form action="{% url 'blog:delete_category' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="category_id" value="{{ item.id }}" />
+                    <button class="negative ui button">Delete</button>
+                </form>
+                </td>
             </tr>
         {% endfor %}
     </table>

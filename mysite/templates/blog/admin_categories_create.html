@@ -1,0 +1,16 @@
+{% extends 'blog/admin.html' %}
+{% load static %}
+{% block admin_content %}
+    <form class="ui form" id="create_category_form" action ="{% url 'blog:add_category' %}" method="post">
+        {% csrf_token %}
+        <div class="field">
+        <label>Category Name:</label>
+        </div>
+        <div class="field">
+        <input required name="category" placeholder="Category Name" type="text">
+        </div>
+        <button class="ui blue button">
+            Submit
+        </button>
+    </form>
+{% endblock %}
