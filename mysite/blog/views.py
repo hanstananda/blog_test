@@ -226,6 +226,7 @@ class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
                 'join_date': user.join_date,
                 'matric_number': user.matric_number,
                 'num_posts': num_post,
+                'is_not_banned': user.user_name.is_active,
             }
             # user_changed = UserProfile.objects.all().filter(
             #    user_name=user.user_name).annotate(num_posts=Value(num_post))
@@ -235,6 +236,28 @@ class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context['users'] = self.users
         return context
+
+
+def ban_user(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        user_id = request.POST.get('user_id')
+        user_from_request = get_object_or_404(User, id=user_id)
+        user_from_request.is_active = False
+        user_from_request.save()
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
+def unban_user(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        user_id = request.POST.get('user_id')
+        user_from_request = get_object_or_404(User, id=user_id)
+        user_from_request.is_active = True
+        user_from_request.save()
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
 
 
 def logout_view(request):

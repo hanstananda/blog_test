@@ -18,10 +18,12 @@ urlpatterns = [
     path('admin/', views.admin_view, name='admin-site'),
     path('admin/categories/', views.CategoriesAdminView.as_view(), name='CategoriesAdminView'),
     path('admin/posts/', views.PostsAdminView.as_view(), name='PostsAdminView'),
-    path('admin/users/', views.UsersAdminView.as_view(), name='UsersAdminView'),
     path('admin/categories/create', views.CategoriesAdminCreate.as_view(), name='CategoriesAdminCreate'),
     path('admin/categories/edit/<int:pk>', views.CategoriesAdminEdit.as_view(), name='CategoriesAdminEdit'),
     path('admin/categories/add_category', views.add_category, name='add_category'),
     path('admin/categories/delete_category', views.delete_category, name='delete_category'),
     path('admin/categories/edit_category', views.edit_category, name='edit_category'),
+    path('admin/users/', views.UsersAdminView.as_view(), name='UsersAdminView'),
+    path('admin/users/ban', views.ban_user, name='ban_user'),
+    path('admin/users/unban', views.unban_user, name='unban_user'),
 ]

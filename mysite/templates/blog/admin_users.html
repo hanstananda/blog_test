@@ -22,11 +22,29 @@
         </tr>
         </thead>
         {% for item in users %}
+            {% if item.is_not_banned %}
             <tr>
+            {% else %}
+            <tr class="error">
+            {% endif %}
                 <td data-label="Name">{{ item.user_name.username }}</td>
                 <td data-label="Comments Count">{{ item.num_posts }}</td>
                 <td data-label="Registered at">{{ item.join_date }}</td>
-                <td data-label="Action"><a>Ban</a></td>
+                <td data-label="Action">
+                {% if item.is_not_banned %}
+                    <form action="{% url 'blog:ban_user' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ item.user_name.id }}" />
+                        <button class="negative ui button">Ban</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'blog:unban_user' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ item.user_name.id }}" />
+                        <button class="positive ui button">Unban</button>
+                    </form>
+                {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </table>
