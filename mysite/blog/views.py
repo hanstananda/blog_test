@@ -172,6 +172,30 @@ class PostsAdminEdit(LoginRequiredMixin, generic.TemplateView):
         return context
 
 
+class PostAdminDetailedView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_post_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.id = self.kwargs['pk']
+        context['post_id'] = self.id
+        self.post = get_object_or_404(Post, id=self.id)
+        context['post'] = self.post
+        self.comments = Comments.objects.filter(commented_on=self.post)
+        self.comments_detailed=[]
+        for comment in self.comments:
+            user = comment.commented_by
+            self.comments_detailed.append({
+                'updated_at': comment.updated_at,
+                'username': user.username,
+                'comment_content': comment.comment_content,
+                'user_profile': get_object_or_404(UserProfile, user_name=user),
+            })
+
+        context['comments_detailed'] = self.comments_detailed
+        return context
+
+
 def update_post(request, pk):
     if request.method == 'POST' and request.user.is_authenticated:
         post = get_object_or_404(Post, id=pk)

@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin/users/unban', views.unban_user, name='unban_user'),
     # Posts GET
     path('admin/posts/', views.PostsAdminView.as_view(), name='PostsAdminView'),
-    path('admin/posts/<int:pk>', views.PostsAdminView.as_view(), name='DetailPostAdminView'),
+    path('admin/posts/<int:pk>', views.PostAdminDetailedView.as_view(), name='DetailPostAdminView'),
     path('admin/posts/create', views.PostsAdminCreate.as_view(), name='PostsAdminCreate'),
     path('admin/posts/edit/<int:pk>', views.PostsAdminEdit.as_view(), name='PostsAdminEdit'),
     # Posts POST

@@ -25,7 +25,11 @@
         </thead>
         {% for item in posts %}
             <tr>
-                <td data-label="Name">{{ item.post_title }}</td>
+                <td data-label="Name">
+                    <a href="{% url 'blog:DetailPostAdminView' item.id%}">
+                    {{ item.post_title }}
+                    </a>
+                </td>
                 <td data-label="Comments Count">{{ item.num_comments }}</td>
                 <td data-label="Created at">{{ item.pub_date }}</td>
                 <td data-label="Action">
