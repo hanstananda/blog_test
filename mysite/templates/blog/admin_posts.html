@@ -3,7 +3,7 @@
 {% block admin_content %}
     <div style="text-align: right;">
         <a href="{% url 'blog:PostsAdminCreate' %}">
-        <button class="ui blue button">Create</button>
+            <button class="ui blue button">Create</button>
         </a>
     </div>
     <table class="ui celled table">
@@ -30,7 +30,11 @@
                 <td data-label="Created at">{{ item.pub_date }}</td>
                 <td data-label="Action">
                     <a href="{% url 'blog:PostsAdminEdit' item.id%}"><button class="ui yellow button">Edit</button></a>
-                    <a>Delete</a></td>
+                    <form action="{% url 'blog:delete_post' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ item.id }}" />
+                        <button class="negative ui button">Delete</button>
+                    </form>
             </tr>
         {% endfor %}
     </table>

@@ -38,6 +38,6 @@ urlpatterns = [
     path('admin/posts/edit/<int:pk>', views.PostsAdminEdit.as_view(), name='PostsAdminEdit'),
     # Posts POST
     path('admin/posts/add_post', views.add_post, name='add_post'),
-    path('admin/posts/delete_post', views.delete_category, name='delete_post'),
+    path('admin/posts/delete_post', views.delete_post, name='delete_post'),
     path('admin/posts/update_post/<int:pk>', views.update_post, name='update_post'),
 ]

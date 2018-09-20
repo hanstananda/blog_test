@@ -30,11 +30,11 @@
                 <td data-label="Created at">{{ item.pub_date }}</td>
                 <td data-label="Action">
                     <a href="{% url 'blog:CategoriesAdminEdit' item.id%}"><button class="ui yellow button">Edit</button></a>
-                <form action="{% url 'blog:delete_category' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="category_id" value="{{ item.id }}" />
-                    <button class="negative ui button">Delete</button>
-                </form>
+                    <form action="{% url 'blog:delete_category' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="category_id" value="{{ item.id }}" />
+                        <button class="negative ui button">Delete</button>
+                    </form>
                 </td>
             </tr>
         {% endfor %}

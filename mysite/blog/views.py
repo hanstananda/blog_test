@@ -209,6 +209,18 @@ def add_post(request):
         return HttpResponseRedirect(reverse('blog:fail'))
 
 
+def delete_post(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            post_id = request.POST.get('post_id', '')
+            post_from_request = Post.objects.filter(id=post_id)
+            post_from_request.delete()
+        except:
+            return HttpResponseRedirect(reverse('blog:fail'))
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
 class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin_categories.html'
 
