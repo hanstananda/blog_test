@@ -189,14 +189,22 @@ def update_post(request, pk):
 
 def add_post(request):
     if request.method == 'POST' and request.user.is_authenticated:
-        try:
-            post_name = request.POST.get('post_name', '')
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post_name = form.cleaned_data['post_title']
+            post_content = form.cleaned_data['post_content']
+            category = form.cleaned_data['category']
             pub_date = datetime.now()
-            category_from_request = Category(category_name=category_name, pub_date=pub_date)
-            category_from_request.save()
-        except:
-            return HttpResponseRedirect(reverse('blog:fail'))
-        return HttpResponseRedirect(reverse('blog:success'))
+            post_from_request = Post(
+                post_title=post_name,
+                post_content=post_content,
+                pub_date=pub_date,
+                category=category,
+                User=request.user,
+            )
+            post_from_request.save()
+            return HttpResponseRedirect(reverse('blog:success'))
+        return HttpResponseRedirect(reverse('blog:fail'))
     else:
         return HttpResponseRedirect(reverse('blog:fail'))
 

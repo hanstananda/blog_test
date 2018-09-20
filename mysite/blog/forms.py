@@ -17,9 +17,9 @@ class CategoryForm(forms.Form):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['category', 'post_title', 'post_content', 'pub_date']
+        fields = ['category', 'post_title', 'post_content']
         widgets = {
-            'pub_date': HiddenInput(),
+            # 'pub_date': HiddenInput(),
             'category': Select(attrs={'class': 'ui search dropdown'})
 
         }
