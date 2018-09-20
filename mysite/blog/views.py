@@ -145,6 +145,33 @@ class PostsAdminView(LoginRequiredMixin, generic.TemplateView):
         return context
 
 
+class PostsAdminCreate(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_posts_create.html'
+
+
+class PostsAdminEdit(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_posts_edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post_id'] = self.kwargs['pk']
+        return context
+
+
+def add_post(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            post_name = request.POST.get('post_name', '')
+            pub_date = datetime.now()
+            category_from_request = Category(category_name=category_name, pub_date=pub_date)
+            category_from_request.save()
+        except:
+            return HttpResponseRedirect(reverse('blog:fail'))
+        return HttpResponseRedirect(reverse('blog:success'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
+
+
 class CategoriesAdminView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin_categories.html'
 

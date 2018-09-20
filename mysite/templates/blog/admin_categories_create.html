@@ -1,6 +1,7 @@
 {% extends 'blog/admin.html' %}
 {% load static %}
 {% block admin_content %}
+    <h1>New Category</h1>
     <form class="ui form" id="create_category_form" action ="{% url 'blog:add_category' %}" method="post">
         {% csrf_token %}
         <div class="field">

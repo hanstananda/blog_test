@@ -2,7 +2,9 @@
 {% load static %}
 {% block admin_content %}
     <div style="text-align: right;">
+        <a href="{% url 'blog:PostsAdminCreate' %}">
         <button class="ui blue button">Create</button>
+        </a>
     </div>
     <table class="ui celled table">
         <thead>
