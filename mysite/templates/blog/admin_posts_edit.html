@@ -1,0 +1,20 @@
+{% extends 'blog/admin.html' %}
+{% load static %}
+{% block admin_content %}
+    <h1>Edit Post</h1>
+    <form class="ui form" id="edit_post_form" action ="{% url 'blog:update_post' post_id%}" method="post">
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+             <div class="field">
+                {{ field.label_tag }}
+                {{ field }}
+             </div>
+        {% endfor %}
+        <button class="ui blue button">
+            Submit
+        </button>
+    </form>
+{% endblock %}

@@ -4,17 +4,28 @@
     <h1>New Post</h1>
     <form class="ui form" id="create_post_form" action ="{% url 'blog:add_post' %}" method="post">
         {% csrf_token %}
-        <div class="field">
-            <label>Post Name:</label>
-        </div>
-        <div class="field">
-            <input required name="post_name" placeholder="Post Name" type="text">
-        </div>
-        <div class="field">
-            <textarea name="post_content" form="create_post_form"></textarea>
-        </div>
+        {% for field in form.visible_fields %}
+             <div class="field">
+                {{ field.label_tag }}
+                {{ field }}
+             </div>
+        {% endfor %}
         <button class="ui blue button">
             Submit
         </button>
+
+{#        {{ form }}#}
+{#        <div class="field">#}
+{#            <label>Post Name:</label>#}
+{#        </div>#}
+{#        <div class="field">#}
+{#            <input required name="post_name" placeholder="Post Name" type="text">#}
+{#        </div>#}
+{#        <div class="field">#}
+{#            <textarea name="post_content" form="create_post_form"></textarea>#}
+{#        </div>#}
+{#        <button class="ui blue button">#}
+{#            Submit#}
+{#        </button>#}
     </form>
 {% endblock %}

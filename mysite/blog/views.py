@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import generic
 from .models import Post, Category, UserProfile, Comments, Likes
 from django.db.models import CharField, Value
-from .forms import NameForm, EditCategoryForm
+from .forms import NameForm, CategoryForm, PostForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout
 from django.db.models import Count
@@ -148,14 +148,43 @@ class PostsAdminView(LoginRequiredMixin, generic.TemplateView):
 class PostsAdminCreate(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin_posts_create.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = PostForm()
+
+        return context
+
 
 class PostsAdminEdit(LoginRequiredMixin, generic.TemplateView):
     template_name = 'blog/admin_posts_edit.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['post_id'] = self.kwargs['pk']
+        self.id = self.kwargs['pk']
+        context['post_id'] = self.id
+        self.post = get_object_or_404(Post, id=self.id)
+        context['form'] = PostForm(initial={
+            'category': self.post.category,
+            'post_title': self.post.post_title,
+            'post_content': self.post.post_content,
+            'pub_date': self.post.pub_date,
+        })
         return context
+
+
+def update_post(request, pk):
+    if request.method == 'POST' and request.user.is_authenticated:
+        post = get_object_or_404(Post, id=pk)
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post.post_title = form.cleaned_data['post_title']
+            post.post_content = form.cleaned_data['post_content']
+            post.category = form.cleaned_data['category']
+            post.save()
+            return HttpResponseRedirect(reverse('blog:success'))
+        return HttpResponseRedirect(reverse('blog:fail'))
+    else:
+        return HttpResponseRedirect(reverse('blog:fail'))
 
 
 def add_post(request):
