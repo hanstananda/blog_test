@@ -97,24 +97,21 @@
                                     <i class="icon edit"></i> Add Comment
                                 </button>
                             </form>
-                            {% for item in comments %}
+                            {% for item in comments_detailed %}
                                 <div class="comment">
-                                    {% if item.user_image is None %}
+                                    {% if item.user_profile.user_image is None %}
                                         <img src="{% static 'default.jpg' %}" max-width="100%" width = "35" height="auto" >
                                     {% else %}
-                                        <img src="{{ item.user_image }}" max-width="100%"  height="auto">
+                                        <img src="{{ item.user_profile.user_image.url }}" max-width="100%" width = "35" height="auto">
                                     {% endif %}
                                     <div class="content">
-                                        <a class="author">{{ item.commented_by.username }}</a>
+                                        <a class="author">{{ item.username }}</a>
                                         <div class="metadata">
                                             <span class="date">{{ item.updated_at }}</span>
                                         </div>
                                         <div class="text">
                                             {{ item.comment_content }}
                                         </div>
-                                        <!-- <div class="actions">
-                                            <a class="reply">Add comment</a>
-                                        </div> -->
                                     </div>
                                 </div>
                             {% endfor %}

@@ -117,13 +117,23 @@ class PostView(generic.ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in the category
+        self.comments_detailed = []
+        for comment in self.comments:
+            user = comment.commented_by
+            self.comments_detailed.append({
+                'updated_at': comment.updated_at,
+                'username': user.username,
+                'comment_content': comment.comment_content,
+                'user_profile': get_object_or_404(UserProfile, user_name=user),
+            })
+
+        context['comments_detailed'] = self.comments_detailed
         context['user_profile'] = self.user_profile
         context['posts'] = self.posts
         context['post'] = self.post
         context['posts_liked'] = self.posts_liked
         context['categories'] = self.categories
         context['category'] = self.category
-        context['comments'] = self.comments
         context['users_profile'] = self.users_profile
         return context
 
