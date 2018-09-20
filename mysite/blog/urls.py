@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/categories/edit_category', views.edit_category, name='edit_category'),
     # Users GET
     path('admin/users/', views.UsersAdminView.as_view(), name='UsersAdminView'),
+    path('admin/users/<int:pk>',views.UserAdminDetailedView.as_view(), name='UserAdminDetailedView'),
     # Users POST
     path('admin/users/ban', views.ban_user, name='ban_user'),
     path('admin/users/unban', views.unban_user, name='unban_user'),

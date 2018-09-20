@@ -348,6 +348,31 @@ class UsersAdminView(LoginRequiredMixin, generic.TemplateView):
         return context
 
 
+class UserAdminDetailedView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'blog/admin_user_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.id = self.kwargs['pk']
+        context['user_id'] = self.id
+        self.user = get_object_or_404(User, id=self.id)
+        self.user_profile = get_object_or_404(UserProfile, user_name=self.user)
+        context['user_profile'] = self.user_profile
+        self.comments = Comments.objects.filter(commented_by=self.user)
+        self.comments_detailed=[]
+        for comment in self.comments:
+            user = comment.commented_by
+            self.comments_detailed.append({
+                'updated_at': comment.updated_at,
+                'username': user.username,
+                'comment_content': comment.comment_content,
+                'user_profile': get_object_or_404(UserProfile, user_name=user),
+            })
+
+        context['comments_detailed'] = self.comments_detailed
+        return context
+
+
 def ban_user(request):
     if request.method == 'POST' and request.user.is_authenticated:
         user_id = request.POST.get('user_id')
