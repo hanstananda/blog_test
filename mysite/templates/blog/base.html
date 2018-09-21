@@ -23,6 +23,19 @@
 <script>
     $('select.dropdown')
         .dropdown();
+    $('button.negative.ui.button').click(function(e){
+        e.preventDefault();
+        let msg=confirm("Are you sure??");
+        if(msg)
+        {
+            $(this).parent().submit();
+        }
+        else
+        {
+            return;
+        }
+    });
+
 </script>
 </body>
 </html>
